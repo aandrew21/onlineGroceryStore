@@ -15,6 +15,13 @@ class Order(models.Model):
     def __str__(self):
         return f"Order {self.id} - {self.user.username}"
 
+    def update_total(self):
+        """Update the total price of the order."""
+        total = sum(item.total_price for item in self.items.all())
+        self.total_price = total
+        self.save()
+
+
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="items")
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -23,5 +30,8 @@ class OrderItem(models.Model):
     def __str__(self):
         return f"{self.quantity} x {self.product.name}"
 
+    @property
+    def total_price(self):
+        """Calculate the total price of the order item."""
+        return self.product.price * self.quantity
 
-# Create your models here.
