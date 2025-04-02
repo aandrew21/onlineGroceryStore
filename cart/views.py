@@ -33,6 +33,9 @@ def add_to_cart(request):
         cart_item.quantity += int(quantity)
     cart_item.save()
 
+    # Update the cart's total price after adding an item
+    cart.update_total_price()
+
     return Response({"message": "Item added to cart"}, status=status.HTTP_200_OK)
 
 @api_view(['DELETE'])
@@ -42,6 +45,10 @@ def remove_from_cart(request, item_id):
     try:
         cart_item = CartItem.objects.get(id=item_id, cart__user=request.user)
         cart_item.delete()
+
+        # Update the cart's total price after removing an item
+        cart_item.cart.update_total_price()
+
         return Response({"message": "Item removed from cart"}, status=status.HTTP_200_OK)
     except CartItem.DoesNotExist:
         return Response({"error": "Item not found in cart"}, status=status.HTTP_404_NOT_FOUND)
@@ -52,6 +59,10 @@ def clear_cart(request):
     """Remove all items from the cart."""
     cart, created = Cart.objects.get_or_create(user=request.user)
     cart.items.all().delete()
+
+    # Reset the total price to 0 after clearing the cart
+    cart.total_price = 0.00
+    cart.save()
+
     return Response({"message": "Cart cleared"}, status=status.HTTP_200_OK)
 
-# Create your views here.
