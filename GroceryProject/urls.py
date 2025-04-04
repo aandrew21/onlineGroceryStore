@@ -24,4 +24,6 @@ urlpatterns = [
     path('api/cart/', include('cart.urls')),
     path('api/orders/', include('orders.urls')),
     path('api/payments/', include('payments.urls')),
+    path('api/auth/', include('rest_framework.urls')),  # This includes login, logout, and session management
+    path('password-reset/', include('django.contrib.auth.urls')),  # This will include reset, change password functionality
 ]
