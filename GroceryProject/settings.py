@@ -141,3 +141,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+PAYSTACK_PUBLIC_KEY = 'pk_test_322ca6fd492cb8d798683af18d85a1e2edb51983'
+PAYSTACK_SECRET_KEY = 'sk_test_c2623e3a84282c99f8b6c2735dd2bbbeba67cd64'
+PAYSTACK_PAYMENT_URL = 'https://api.paystack.co/transaction/initialize'
+

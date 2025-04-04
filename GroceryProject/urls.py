@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from orders import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +26,7 @@ urlpatterns = [
     path('api/orders/', include('orders.urls')),
     path('api/payments/', include('payments.urls')),
     path('api/auth/', include('rest_framework.urls')),  # This includes login, logout, and session management
-    path('password-reset/', include('django.contrib.auth.urls')),  # This will include reset, change password functionality
+    path('password-reset/', include('django.contrib.auth.urls')),
+    path('paystack/initialize/', views.paystack_initialize, name='paystack_initialize'),
+    path('paystack/verify/', views.paystack_verify, name='paystack_verify'),
 ]
