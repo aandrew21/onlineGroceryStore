@@ -60,9 +60,9 @@ def clear_cart(request):
     cart, created = Cart.objects.get_or_create(user=request.user)
     cart.items.all().delete()
 
-    # Reset the total price to 0 after clearing the cart
+    # Total price resets to 0 after clearing the cart
     cart.total_price = 0.00
     cart.save()
 
-    return Response({"message": "Cart cleared"}, status=status.HTTP_200_OK)
+    return Response({"message": "Cart Cleared"}, status=status.HTTP_200_OK)
 
