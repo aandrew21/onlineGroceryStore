@@ -1,169 +1,87 @@
 Online Grocery Store
 This is a Django-based Online Grocery Store application, designed to enable users to shop for groceries online. The project includes features like user authentication, product management, shopping cart functionality, order processing, and secure payment integration using Paystack.
 
-Features
-User Authentication:
+1. Features
+1.1. User Authentication
+  - Sign-up, login, logout, and password reset functionalities.
+  - User roles: Admin and Customer.
 
-Sign-up, login, logout, and password reset functionalities.
+1.2. Product Management
+  - CRUD operations for products and categories.
+  - Filtering by name, category, and price.
 
-User roles: Admin (for managing products and orders) and Customer (for browsing and ordering products).
+1.3. Shopping Cart
+  - Add, update, and remove items from cart.
 
-Product Management:
+1.4. Order Management
+  - Place and track orders.
+  - Admin view and manage orders.
 
-CRUD operations for managing products and categories.
+1.5. Payment Integration
+  - Secure checkout using Paystack.
 
-Customers can browse and filter products by category, price, and name.
+1.6. Admin Panel
+  - Manage users, products, and orders via Django Admin.
 
-Shopping Cart:
+1.7. RESTful API
+  - API for products, users, orders, and cart operations.
 
-Customers can add, update, and remove products from the shopping cart.
+2. Technologies Used
+2.1. Django
+2.2. Django REST Framework
+2.3. PostgreSQL
+2.4. Paystack API
+2.5. Bootstrap (optional for UI)
 
-Order Management:
-
-Customers can place orders, and admins can view and manage these orders.
-
-Track order status (e.g., pending, completed, etc.).
-
-Payment Integration:
-
-Integrated with Paystack for handling secure payments.
-
-Checkout process includes billing information and payment transaction handling.
-
-Admin Panel:
-
-Admins can manage users, products, and orders via Django's built-in admin interface.
-
-RESTful API:
-
-API endpoints for managing products, orders, and user accounts (using Django REST Framework).
-
-Technologies Used
-Django: Web framework for rapid development.
-
-Django REST Framework: For building the API.
-
-PostgreSQL: Relational database for storing application data.
-
-Paystack: Payment gateway for secure online payments.
-
-Bootstrap: For front-end design (optional, depending on your implementation).
-
-Setup and Installation
-Prerequisites
-Python 3.12+
-
-Django 4.0+
-
-PostgreSQL
-
-Steps to Set Up Locally
-Clone the repository:
+3. Setup and Installation
+3.1. Clone the repository:
 
 bash
 Copy
 Edit
 git clone https://github.com/your-username/OnlineGroceryStore.git
 cd OnlineGroceryStore
-Create and activate a virtual environment:
+3.2. Create and activate virtual environment:
 
 bash
 Copy
 Edit
 python3 -m venv venv
-source venv/bin/activate  # On Windows, use venv\Scripts\activate
-Install the required dependencies:
+source venv/bin/activate  # Or venv\Scripts\activate for Windows
 
-bash
-Copy
-Edit
+3.3. Install dependencies:
 pip install -r requirements.txt
-Set up your PostgreSQL database (create a new database and user).
 
-Configure Paystack by setting your secret key in the settings.py file:
-
-python
-Copy
+3.4. Set up PostgreSQL database.
+3.5. Add Paystack key in settings.py:
 Edit
-PAYSTACK_SECRET_KEY = 'your-paystack-secret-key'
-Run migrations:
+PAYSTACK_SECRET_KEY = 'your-secret-key'
 
-bash
-Copy
-Edit
+3.6. Run migrations:
 python manage.py migrate
-Create a superuser for accessing the admin panel:
 
-bash
-Copy
-Edit
+3.7. Create superuser:
 python manage.py createsuperuser
-Run the development server:
 
-bash
-Copy
-Edit
+3.8. Start development server:
 python manage.py runserver
-Visit the application at http://127.0.0.1:8000.
 
-API Endpoints
-User Endpoints
-POST /api/auth/register/: Register a new user.
+3.9. Access app at http://127.0.0.1:8000
 
-POST /api/auth/login/: Login to get an authentication token.
+4. API Endpoints
+4.1. User
+  - POST /api/auth/register/
+  - POST /api/auth/login/
+  - POST /api/auth/logout/
+  - POST /api/auth/password-reset/
 
-POST /api/auth/logout/: Logout the current user.
+4.2. Product
+  - GET /api/products/
+  - GET /api/products/{id}/
+  - POST /api/products/ (Admin)
+  - PUT /api/products/{id}/ (Admin)
+  - DELETE /api/products/{id}/ (Admin)
 
-POST /api/auth/password-reset/: Reset password.
-
-Product Endpoints
-GET /api/products/: Get a list of all products.
-
-GET /api/products/{id}/: Get details of a specific product.
-
-POST /api/products/: Admin endpoint to create a new product.
-
-PUT /api/products/{id}/: Admin endpoint to update product details.
-
-DELETE /api/products/{id}/: Admin endpoint to delete a product.
-
-Order Endpoints
-GET /api/orders/: Get a list of all orders (for Admins).
-
-POST /api/orders/: Create a new order (for Customers).
-
-Testing
-Unit Tests:
-
-Django's testing framework is used to test the views and functionality.
-
-Run tests with:
-
-bash
-Copy
-Edit
-python manage.py test
-Postman:
-
-Use Postman to test API endpoints like product management, user authentication, and checkout.
-
-Security Considerations
-HTTPS: Ensure HTTPS is enabled in production to securely handle user data.
-
-Sensitive Data: Paystack API keys are securely stored in the environment settings.
-
-Deployment
-Deploy the project to a server using platforms like Heroku, AWS, or DigitalOcean.
-
-Set up your PostgreSQL database and ensure all environment variables (such as PAYSTACK_SECRET_KEY) are configured securely.
-
-Ensure your application uses HTTPS for secure connections.
-
-Future Improvements
-Add reviews and ratings for products.
-
-Implement discounts and promo codes.
-
-Include an order history page for customers.
-
-Add user profiles with additional details (e.g., delivery address).
+4.3. Order
+  - GET /api/orders/ (Admin)
+  - POST /api/orders/ (Customer)
